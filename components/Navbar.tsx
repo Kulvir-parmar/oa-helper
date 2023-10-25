@@ -1,25 +1,15 @@
-import { Menu } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-
 import UserButton from '@/components/UserButton';
 import { getAuthSession } from '@/lib/auth';
-import AuthButton from '@/components/AuthButton';
+import MobileSiderbar from '@/components/MobileSiderbar';
 
 const Navbar = async () => {
   const session = await getAuthSession();
-  console.log(session);
 
   return (
     <div className='flex items-center p-4'>
-      <Button variant='ghost' size='icon' className='md:hidden'>
-        <Menu />
-      </Button>
+      <MobileSiderbar />
       <div className='flex w-full justify-end'>
-        {session?.user ? (
-          <UserButton user={session.user} />
-        ) : (
-          <AuthButton isSignIn>Sign ip</AuthButton>
-        )}
+        <UserButton user={session?.user!} />
       </div>
     </div>
   );

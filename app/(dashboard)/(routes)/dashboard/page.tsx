@@ -8,7 +8,6 @@ const DashBoard = () => {
   return (
     <div>
       <div>Dashboard Page</div>
-      <AuthButton isSignIn={false}>Logout</AuthButton>
     </div>
   );
 };
