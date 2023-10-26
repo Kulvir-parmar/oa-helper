@@ -21,13 +21,13 @@ export async function POST(req: Request) {
     const session = getAuthSession();
 
     const body = await req.json();
-    const { message } = body;
+    const { messages } = body;
 
     if (!openai.apiKey) {
       return new NextResponse('OpenAI API key missing', { status: 500 });
     }
 
-    if (!message) {
+    if (!messages) {
       return new NextResponse('Message missing', { status: 400 });
     }
 
@@ -44,7 +44,7 @@ export async function POST(req: Request) {
 
     const response = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
-      messages: [instructionMessage, message],
+      messages: [instructionMessage, ...messages],
     });
 
     await descreaseApiLimit();

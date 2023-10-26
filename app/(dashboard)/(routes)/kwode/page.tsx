@@ -22,17 +22,20 @@ import Empty from '@/components/Empty';
 import { formSchema } from './constants';
 import UserAvatar from '@/components/UserAvatar';
 import OaAvatar from '@/components/OaAvatar';
+import { useModal } from '@/hooks/use-modal';
 
 const AptitudeSolver = () => {
   const { data: session } = useSession();
+  // console.log(session);
 
+  const proModal = useModal();
   const router = useRouter();
   const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      aptique: '',
+      kwodingque: '',
     },
   });
 
@@ -42,7 +45,7 @@ const AptitudeSolver = () => {
     try {
       const userMessage: ChatCompletionMessageParam = {
         role: 'user',
-        content: values.aptique,
+        content: values.kwodingque,
       };
 
       const newMessages = [...messages, userMessage];
@@ -54,8 +57,10 @@ const AptitudeSolver = () => {
       setMessages((current) => [...current, userMessage, response.data]);
 
       form.reset();
-    } catch (error) {
-      // TODO: Open pro model
+    } catch (error: any) {
+      if (error?.response?.status === 403) {
+        proModal.openModal();
+      }
       console.log('[FORM_SUBMIT]', error);
     } finally {
       router.refresh();
@@ -79,7 +84,7 @@ const AptitudeSolver = () => {
               className='rounded-lg border p-4 w-full px-3  md:px-6 focus-within:shadow-sm grid grid-cols-12 gap-2'
             >
               <FormField
-                name='aptique'
+                name='kwodingque'
                 render={({ field }) => (
                   <FormItem className='col-span-12 lg:col-span-10'>
                     <FormControl className='m-0 p-0'>

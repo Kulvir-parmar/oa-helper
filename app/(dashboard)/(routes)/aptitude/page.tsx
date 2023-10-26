@@ -21,10 +21,12 @@ import Empty from '@/components/Empty';
 import { formSchema } from './constants';
 import UserAvatar from '@/components/UserAvatar';
 import OaAvatar from '@/components/OaAvatar';
+import { useModal } from '@/hooks/use-modal';
 
 const AptitudeSolver = () => {
   const { data: session } = useSession();
 
+  const proModal = useModal();
   const router = useRouter();
   const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([]);
 
@@ -53,8 +55,10 @@ const AptitudeSolver = () => {
       setMessages((current) => [...current, userMessage, response.data]);
 
       form.reset();
-    } catch (error) {
-      // TODO: Open pro model
+    } catch (error: any) {
+      if (error?.response?.status === 403) {
+        proModal.openModal();
+      }
       console.log('[FORM_SUBMIT]', error);
     } finally {
       router.refresh();
