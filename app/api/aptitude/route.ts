@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 
 import { descreaseApiLimit, isApiLimitExceeded } from '@/lib/api-limit';
+import { checkSubscription } from '@/lib/subscription';
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -24,8 +25,9 @@ export async function POST(req: Request) {
     }
 
     const freeTrail = await isApiLimitExceeded();
+    const isPro = await checkSubscription();
 
-    if (!freeTrail) {
+    if (!freeTrail && !isPro) {
       return new NextResponse(
         'Broo can&apos;t even solve solve single question yourself can looking for a tech JOB. Go Solve your questions first or you can pay me to do that for you.',
         {
@@ -39,7 +41,9 @@ export async function POST(req: Request) {
       messages: messages,
     });
 
-    await descreaseApiLimit();
+    if (!isPro) {
+      await descreaseApiLimit();
+    }
 
     return NextResponse.json(response.choices[0].message);
   } catch (error) {
