@@ -4,6 +4,7 @@ import './globals.css'
 
 import { AuthProvider } from '@/components/Providers/AuthProvider';
 import { Toaster } from '@/components/ui/toaster';
+import ModalProvider from '@/components/Providers/ModalProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -12,11 +13,18 @@ export const metadata: Metadata = {
   description: 'ai that will do code so that I can clear my OA.',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <ModalProvider />
+          {children}
+        </AuthProvider>
         <Toaster />
       </body>
     </html>
