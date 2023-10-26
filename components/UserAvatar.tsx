@@ -23,7 +23,7 @@ function UserAvatar({ user, ...props }: UserAvatarProps) {
         </div>
       ) : (
         <AvatarFallback>
-          <span className='sr-only'>{user?.name}</span>
+          <span className='sr-only'>{user?.name?.charAt(0)}</span>
           <UserIcon className='w-4 h-4' />
         </AvatarFallback>
       )}
