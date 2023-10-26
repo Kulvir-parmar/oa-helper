@@ -35,8 +35,8 @@ const DashBoard = () => {
         </h2>
         <p className='text-muted-foreground font-light text-sm md:text-lg text-center'>
           Send your questions to{' '}
-          <span className='text-blue-500'>oa-helper</span> and get very accurate
-          answers and pass oa&apos;s easily!
+          <span className='text-blue-500 underline'>oa-helper</span> and get
+          very accurate answers and pass oa&apos;s easily!
         </p>
       </div>
       <div className='px-4 md:px-20 lg:px-32 space-y-4'>

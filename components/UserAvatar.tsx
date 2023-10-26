@@ -13,7 +13,7 @@ function UserAvatar({ user, ...props }: UserAvatarProps) {
   return (
     <Avatar {...props}>
       {user?.image ? (
-        <div className='realtive aspect-square h-full w-full'>
+        <div className='realtive'>
           <Image
             fill
             src={user.image}
