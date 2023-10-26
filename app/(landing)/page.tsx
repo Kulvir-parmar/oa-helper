@@ -1,12 +1,13 @@
-import LoginButton from '@/components/AuthButton';
+import { LandingContent } from '@/components/LandingContent';
+import LandingHero from '@/components/LandingHero';
+import LandingNavbar from '@/components/LandingNavbar';
 
 export default function Landing() {
   return (
-    <div>
-      This is my landing page and I am writing shit here.
-      <div>
-        <LoginButton isSignIn={true}>Login</LoginButton>
-      </div>
+    <div className='h-full'>
+      <LandingNavbar />
+      <LandingHero />
+      <LandingContent />
     </div>
   );
 }

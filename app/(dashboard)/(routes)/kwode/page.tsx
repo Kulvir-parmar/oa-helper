@@ -23,11 +23,12 @@ import { formSchema } from './constants';
 import UserAvatar from '@/components/UserAvatar';
 import OaAvatar from '@/components/OaAvatar';
 import { useModal } from '@/hooks/use-modal';
+import { useToast } from '@/hooks/use-toast';
 
 const AptitudeSolver = () => {
   const { data: session } = useSession();
-  // console.log(session);
 
+  const { toast } = useToast();
   const proModal = useModal();
   const router = useRouter();
   const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([]);
@@ -60,6 +61,13 @@ const AptitudeSolver = () => {
     } catch (error: any) {
       if (error?.response?.status === 403) {
         proModal.openModal();
+      } else {
+        toast({
+          title: 'Something went wrong!',
+          description:
+            'Get a good connection buddy and then try again. This AI aint for you loosers without internet and wanna work in tech.',
+          variant: 'destructive',
+        });
       }
       console.log('[FORM_SUBMIT]', error);
     } finally {
