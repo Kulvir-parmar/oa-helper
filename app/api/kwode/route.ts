@@ -3,6 +3,8 @@ import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 import { ChatCompletionMessageParam } from 'openai/resources/index.mjs';
 
+import { descreaseApiLimit, isApiLimitExceeded } from '@/lib/api-limit';
+
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
@@ -29,10 +31,23 @@ export async function POST(req: Request) {
       return new NextResponse('Message missing', { status: 400 });
     }
 
+    const freeTrail = await isApiLimitExceeded();
+
+    if (!freeTrail) {
+      return new NextResponse(
+        'Broo can&apos;t even solve solve single question yourself can looking for a tech JOB. Go Solve your questions first or you can pay me to do that for you.',
+        {
+          status: 403,
+        }
+      );
+    }
+
     const response = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
       messages: [instructionMessage, message],
     });
+
+    await descreaseApiLimit();
 
     return NextResponse.json(response.choices[0].message);
   } catch (error) {
