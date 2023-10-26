@@ -2,13 +2,14 @@
 
 import axios from 'axios';
 import * as z from 'zod';
-import { MessageSquare } from 'lucide-react';
+import { Code, Divide } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { ChatCompletionMessageParam } from 'openai/resources/index.mjs';
 import { useSession } from 'next-auth/react';
+import ReactMarkdown from 'react-markdown';
 
 import Heading from '@/components/Heading';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
@@ -46,7 +47,7 @@ const AptitudeSolver = () => {
 
       const newMessages = [...messages, userMessage];
 
-      const response = await axios.post('/api/aptitude', {
+      const response = await axios.post('/api/kwode', {
         messages: newMessages,
       });
 
@@ -64,11 +65,11 @@ const AptitudeSolver = () => {
   return (
     <div>
       <Heading
-        title='Aptitude Solver'
-        description='Send your aptitude questions or logical reasoning questions and get the answer in a few seconds.'
-        icon={MessageSquare}
-        iconColor='text-violet-500'
-        bgColor='bg-violet-500/10'
+        title='Kwoder'
+        description='Send your Easy Leetcode problems which you are not able to solve you ugly ass bitch (Striver sheet hi krle).'
+        icon={Code}
+        iconColor='text-green-700'
+        bgColor='bg -green-700/10'
       />
       <div className='px-4 lg:px-8'>
         <div>
@@ -86,7 +87,7 @@ const AptitudeSolver = () => {
                         {...field}
                         className='border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent'
                         disabled={isLoading}
-                        placeholder='Meri Job toh lag jayegi naa bhiaymaa??'
+                        placeholder='Bhiayma DP kahan se kruu? (Striver bkl Striver...)'
                       />
                     </FormControl>
                   </FormItem>
@@ -123,7 +124,21 @@ const AptitudeSolver = () => {
                 ) : (
                   <OaAvatar />
                 )}
-                <p className='text-sm '>{message.content}</p>
+                <ReactMarkdown
+                  components={{
+                    pre: ({ node, ...props }) => (
+                      <div className='overflow-auto w-full my-2 bg-black/10 p-2 rounded-lg'>
+                        <pre {...props} />
+                      </div>
+                    ),
+                    code: ({ node, ...props }) => (
+                      <code className='bg-black/10 rounded-lg p-1' {...props} />
+                    ),
+                  }}
+                  className='text-sm overflow-hidden leading-7'
+                >
+                  {message.content || ''}
+                </ReactMarkdown>
               </div>
             ))}
           </div>
