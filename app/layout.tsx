@@ -9,7 +9,7 @@ import ModalProvider from '@/components/Providers/ModalProvider';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'codeai',
+  title: 'oa-helper',
   description: 'ai that will do code so that I can clear my OA.',
 };
 
