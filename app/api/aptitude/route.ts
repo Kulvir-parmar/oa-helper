@@ -1,7 +1,7 @@
-// import { getAuthSession } from '@/lib/auth';
-import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
+import { NextResponse } from 'next/server';
 
+import { getAuthSession } from '@/lib/auth';
 import { descreaseApiLimit, isApiLimitExceeded } from '@/lib/api-limit';
 import { checkSubscription } from '@/lib/subscription';
 
@@ -11,7 +11,11 @@ const openai = new OpenAI({
 
 export async function POST(req: Request) {
   try {
-    // TODO: check is use is logged in and has access to this route
+    const session = await getAuthSession();
+
+    if (!session?.user) {
+      return new NextResponse('User not found', { status: 401 });
+    }
 
     const body = await req.json();
     const { messages } = body;

@@ -10,15 +10,15 @@ import { useState } from 'react';
 import { ChatCompletionMessageParam } from 'openai/resources/index.mjs';
 import { useSession } from 'next-auth/react';
 
-import Heading from '@/components/Heading';
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import Loader from '@/components/Loader';
 import { cn } from '@/lib/utils';
-import Empty from '@/components/Empty';
 
 import { formSchema } from './constants';
+import Heading from '@/components/Heading';
+import Empty from '@/components/Empty';
+import Loader from '@/components/Loader';
 import UserAvatar from '@/components/UserAvatar';
 import OaAvatar from '@/components/OaAvatar';
 import { useModal } from '@/hooks/use-modal';
@@ -78,7 +78,7 @@ const AptitudeSolver = () => {
     <div>
       <Heading
         title='Aptitude Solver'
-        description='Send your aptitude questions or logical reasoning questions and get the answer in a few seconds.'
+        description='Send your aptitude questions and get the answers in a few seconds.'
         icon={MessageSquare}
         iconColor='text-violet-500'
         bgColor='bg-violet-500/10'

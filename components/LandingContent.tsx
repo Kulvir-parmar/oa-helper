@@ -4,30 +4,32 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const testimonials = [
   {
-    name: 'Joel',
-    avatar: 'J',
-    title: 'unemployed',
-    description: "This is the best application I've ever used!",
+    name: 'Raghav Gupta',
+    avatar: 'R',
+    title: 'Texas Intern',
+    description:
+      'Itni fast to mai digital ke questions nai krr paata jitni jaldi oa-helper answers de deta hai!',
   },
   {
-    name: 'Antonio',
+    name: 'Aryan Gupta',
     avatar: 'A',
-    title: 'Designer',
-    description: 'I use this daily for generating new photos!',
+    title: 'ARM (3nm team)',
+    description:
+      'Bhai mere interview ke answers sbhi itni jaldi sirf oa-helper hi krwaa skta thaa. Thanks OA-HELPER!',
   },
   {
-    name: 'Mark',
-    avatar: 'M',
-    title: 'CEO',
+    name: 'Horny Harry',
+    avatar: 'HH',
+    title: 'Playsimple mai Plaboy',
     description:
-      'This app has changed my life, cannot imagine working without it!',
+      'Bhai Leetcode Knight bnne tkk journey and DP ke diffcult questions ki explanatin and answers yeh sbb mai oa-helper hi mere saath thaa!',
   },
   {
-    name: 'Mary',
-    avatar: 'M',
-    title: 'CFO',
+    name: 'Sam NPC',
+    avatar: 'S',
+    title: 'Naukri coming bery soon.',
     description:
-      'The best in class, definitely worth the premium subscription!',
+      'Ji dekho... oa-helper ne mere saare oa to solve krwaa diye hain.. But BKL companies wale CG cut lgga dete hai!',
   },
 ];
 
@@ -50,7 +52,7 @@ export const LandingContent = () => {
                   <p className='text-zinc-400 text-sm'>{item.title}</p>
                 </div>
               </CardTitle>
-              <CardContent className='pt-4 px-0'>
+              <CardContent className='pt-4 px-0 text-muted-foreground text-sm font-medium'>
                 {item.description}
               </CardContent>
             </CardHeader>

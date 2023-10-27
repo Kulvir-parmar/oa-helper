@@ -34,7 +34,7 @@ const routes = [
     color: 'text-green-500',
   },
   {
-    label: 'Fine tune oa-helper',
+    label: 'oa-helper settings',
     href: '/settings',
     icon: Settings,
   },

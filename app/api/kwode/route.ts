@@ -13,13 +13,16 @@ const openai = new OpenAI({
 const instructionMessage: ChatCompletionMessageParam = {
   role: 'system',
   content:
-    'You are leetcode Knight rated competitive coder. You must answer the questions in markdown code snippets. Also use comments to explain the code snippets.',
+    'You are leetcode Guardian rated competitive coder. You must answer the questions in markdown code snippets only. Use C++ as your default language to write code for the problems provided. Make sure to provide me the optimal code for most efficient run time and most efficient memory usage. Also use comments to explain the code snippets.',
 };
 
 export async function POST(req: Request) {
   try {
-    // TODO: check is use is logged in and has access to this route
-    const session = getAuthSession();
+    const session = await getAuthSession();
+
+    if (!session?.user) {
+      return new NextResponse('User not found', { status: 401 });
+    }
 
     const body = await req.json();
     const { messages } = body;

@@ -15,6 +15,9 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GITHUB_CLIENT_SECRET!,
     }),
   ],
+  pages: {
+    signIn: '/signin',
+  },
   callbacks: {
     async session({ token, session }) {
       if (token) {

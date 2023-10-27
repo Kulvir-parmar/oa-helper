@@ -21,7 +21,7 @@ function UserButton({ user }: UserButtonProps) {
     <DropdownMenu>
       <DropdownMenuTrigger>
         <UserAvatar
-          user={{ name: user.name || null, image: user.image || null }}
+          user={{ name: user?.name, image: user?.image }}
           className='w-12 h-12'
         />
       </DropdownMenuTrigger>
